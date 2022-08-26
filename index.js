@@ -1,8 +1,9 @@
 const express=require("express");
 const cors=require("cors");
 const stripe=require("stripe")
-('sk_test_51LJalQSI39jpT9zPPC01Am4ZJNWjLS4WG3o9RiKavtcxXua32N85U0uRfId9x56Kmb42nFSWuzZIjsgDNaoqjhkh001jDYYkwe')
 
+('sk_test_51LJalQSI39jpT9zPPC01Am4ZJNWjLS4WG3o9RiKavtcxXua32N85U0uRfId9x56Kmb42nFSWuzZIjsgDNaoqjhkh001jDYYkwe')
+require('dotenv').config();
 //app config
 const app = express();
 
@@ -12,10 +13,12 @@ app.use(express.json());
 
 // - API routes
 app.get("/", (request, response) => response.status(200).send("hello world vicky"));
-const port= 5000;
-app.listen(port,() =>{
-    console.log("localhost connected sucessfully");
-})
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => console.log(`server running on port ${port}`));
+
+
 
 app.post("/payments/create", async (request, response) => {
     const total = request.query.total;
